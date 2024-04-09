@@ -10,7 +10,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.ImageDecoder;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -114,6 +113,7 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+
                     SharedPreferences.Editor pref = sharedPreferences.edit();
                     pref.putString(Name, name);
                     pref.putString(Password, password);
@@ -124,7 +124,9 @@ public class SignUpActivity extends AppCompatActivity {
                     pref.commit();
 
                     Toast.makeText(SignUpActivity.this, "User Created", Toast.LENGTH_SHORT).show();
-                    verifyEmail();
+                    Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                    startActivity(intent);
+//                    verifyEmail();
                 } else {
                     Toast.makeText(SignUpActivity.this, "Fail Try Again", Toast.LENGTH_SHORT).show();
                 }
@@ -137,34 +139,34 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
-    private void verifyEmail() {
-        FirebaseUser user = mAuth.getCurrentUser();
-        if (user != null) {
-            user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()) {
-
-                        SharedPreferences.Editor pref = sharedPreferences.edit();
-                        pref.putString(Name,name);
-                        pref.putString(Password,password);
-                        pref.putString(Email,email);
-                        pref.putString(NationalId,nationalId);
-                        pref.putString(Image,mainUri.toString());
-                        pref.commit();
-
-                        Toast.makeText(SignUpActivity.this, "Verification email sent", Toast.LENGTH_SHORT).show();
-                       FirebaseAuth.getInstance().signOut();
-                        startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
-                        finish();
-                    } else {
-                        mAuth.signOut();
-                        finish();
-                    }
-                }
-            });
-        }
-    }
+//    private void verifyEmail() {
+//        FirebaseUser user = mAuth.getCurrentUser();
+//        if (user != null) {
+//            user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+//                @Override
+//                public void onComplete(@NonNull Task<Void> task) {
+//                    if (task.isSuccessful()) {
+//
+////                        SharedPreferences.Editor pref = sharedPreferences.edit();
+////                        pref.putString(Name,name);
+////                        pref.putString(Password,password);
+////                        pref.putString(Email,email);
+////                        pref.putString(NationalId,nationalId);
+////                        pref.putString(Image,mainUri.toString());
+////                        pref.commit();
+//
+//                        Toast.makeText(SignUpActivity.this, "Verification email sent", Toast.LENGTH_SHORT).show();
+//                        FirebaseAuth.getInstance().signOut();
+//                        startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+//                        finish();
+//                    } else {
+//                        mAuth.signOut();
+//                        finish();
+//                    }
+//                }
+//            });
+//        }
+//    }
 
 
     private void cropImage() {
@@ -180,5 +182,6 @@ public class SignUpActivity extends AppCompatActivity {
             mainUri = data.getData();
             userProfile.setImageURI(mainUri);
         }
+
     }
 }

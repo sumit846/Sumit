@@ -20,6 +20,15 @@
         android:theme="@style/Theme.Sumit"
         tools:targetApi="31">
         <activity
+            android:name=".activities.ResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.VotingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.AllCandidateActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.Create_Candidate_Activity"
             android:exported="false" />
         <activity
@@ -28,10 +37,12 @@
         <activity
             android:name=".activities.HomeActivity"
             android:exported="false" /> <!-- CropImageActivity -->
-        <activity
-            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-            android:theme="@style/Base.Theme.AppCompat"
-            tools:ignore="MissingClass" /> <!-- Activities -->
+        <!-- activity delelted -->
+        <!-- <activity -->
+        <!-- android:name="com.theartofdev.edmodo.cropper.CropImageActivity" -->
+        <!-- android:theme="@style/Base.Theme.AppCompat" -->
+        <!-- tools:ignore="MissingClass" /> -->
+        <!-- Activities -->
         <activity
             android:name=".activities.SignUpActivity"
             android:exported="false" />
@@ -40,7 +51,7 @@
             android:exported="false" /> <!-- SplashScreen -->
         <activity
             android:name=".SplashScreen"
-            android:exported="false"> <!-- Set exported to false -->
+            android:exported="true"> <!-- Set exported to false -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

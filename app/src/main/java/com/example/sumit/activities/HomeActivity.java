@@ -26,15 +26,15 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeActivity extends AppCompatActivity {
 
-        public static final String PREFERNCES = "prefKey";
-        SharedPreferences sharedPreferences;
-        public static final String IsLogin = "islogin";
+    public static final String PREFERNCES = "prefKey";
+    SharedPreferences sharedPreferences;
+    public static final String IsLogin = "islogin";
 
-        private CircleImageView circleImg;
-        private TextView nameTxt, nationalIdTxt;
-        private String uid;
-        private FirebaseFirestore firebaseFirestore;
-        private Button createBtn, voteBtn;
+    private CircleImageView circleImg;
+    private TextView nameTxt, nationalIdTxt;
+    private String uid;
+    private FirebaseFirestore firebaseFirestore;
+    private Button createBtn, voteBtn;
 
     @SuppressLint("MissingInflatedId")
     @Override

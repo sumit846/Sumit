@@ -74,17 +74,24 @@ public class LoginActivity extends AppCompatActivity {
                 String email = userEmail.getText().toString().trim();
                 String password = userPassword.getText().toString().trim();
 
-                mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+                if (!email.isEmpty() && !password.isEmpty()){
 
-                        if(task.isSuccessful()){
-                            verifyEmail();
-                        }else{
-                            Toast.makeText(LoginActivity.this, "User not found", Toast.LENGTH_SHORT).show();
+                    mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+
+                            if(task.isSuccessful()){
+                                Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                startActivity(intent);
+//                                verifyEmail();
+                            }else{
+                                Toast.makeText(LoginActivity.this, "User not found", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
+                    });
+                }
+
             }
         });
     forgetPassword.findViewById(R.id.forget_password).setOnClickListener(new View.OnClickListener(){
@@ -113,7 +120,7 @@ public class LoginActivity extends AppCompatActivity {
                 String image = sharedPreferences.getString(Image, null);
 
 
-                if (name != null && password != null && email != null && nationalId != null && image != null) {
+                if (name != null && password != null && email != null && nationalId != null ) {
 
                     String uid = mAuth.getUid();
 
